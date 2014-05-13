@@ -21,13 +21,9 @@ Please check `list of additional requirements <http://spyne.io/docs/2.10/#requir
 Simple server example
 ---------------------
 
-::
-
 .. include:: example/simple_server.py
 
 Client example:
 ---------------
-
-::
 
 .. include:: example/simple_client.py
