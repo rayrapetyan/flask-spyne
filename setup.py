@@ -1,4 +1,5 @@
 """
+
 Flask-Spyne
 ===========
 
@@ -79,11 +80,11 @@ setup(
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Software Development :: Libraries :: Python Modules'
     ],
-    description='A Flask extension, provides support for Spyne that makes it easy to expose online services that have a well-defined API using multiple protocols and transports.',
+    description='A Flask extension, provides support for Spyne which supports SOAP, WSDL, JSON, XML and other protocols.',
     download_url='http://pypi.python.org/pypi/Flask-Spyne',
     install_requires=requirements,
     include_package_data=True,
-    keywords=['Flask', 'Spyne', 'soap', 'wsdl', 
+    keywords=['flask', 'spyne', 'soap', 'wsdl', 
             'wsgi', 'zeromq', 'rest', 'rpc', 'json', 'http',
             'msgpack', 'xml', 'sqlalchemy', 'werkzeug', 'yaml'],
     license='BSD',
