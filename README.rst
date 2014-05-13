@@ -18,12 +18,12 @@ pip install flask-spyne
 
 Please check `list of additional requirements <http://spyne.io/docs/2.10/#requirements>`_ you might need to install.
 
-Simple server example
+Server example
 ---------------------
 
 .. include:: example/simple_server.py
 
-Client example:
----------------
+Client example
+--------------
 
 .. include:: example/simple_client.py
