@@ -11,10 +11,11 @@ extension (a wrapper on top of outdated `soaplib <http://soaplib.github.io/soapl
 * `Documentation <https://pythonhosted.org/Flask-Spyne/>`_
 * `PyPI listing <http://pypi.python.org/pypi/Flask-Spyne>`_
 
-Installation:
--------------
+Installation
+------------
+::
 
-pip install flask-spyne
+  pip install flask-spyne
 
 Please check `list of additional requirements <http://spyne.io/docs/2.10/#requirements>`_ you might need to install.
 
