@@ -21,9 +21,39 @@ Please check `list of additional requirements <http://spyne.io/docs/2.10/#requir
 Server example
 ---------------------
 
-.. include:: example/simple_server.py
+.. code-block:: python
+
+  from flask import Flask
+  from flask.ext.spyne import Spyne
+  from spyne.protocol.soap import Soap11
+  from spyne.model.primitive import Unicode, Integer
+  from spyne.model.complex import Iterable
+  
+  app = Flask(__name__)
+  spyne = Spyne(app)
+  
+  class SomeSoapService(spyne.service):
+      __service_url_path__ = '/soap/someservice'
+      __in_protocol__ = Soap11(validator='lxml')
+      __out_protocol__ = Soap11()
+      
+      @spyne.srpc(Unicode, Integer, _returns=Iterable(Unicode))
+      def echo(str, cnt):
+          for i in range(cnt):
+              yield str
+  
+  if __name__ == '__main__':
+      app.run(host = '127.0.0.1')
 
 Client example
 --------------
 
-.. include:: example/simple_client.py
+.. code-block:: python
+
+  from suds.client import Client as SudsClient
+
+  url = 'http://127.0.0.1:5000/soap/someservice?wsdl'
+  client = SudsClient(url=url, cache=None)
+  r = client.service.echo(str='hello world', cnt=3)
+  print r
+
