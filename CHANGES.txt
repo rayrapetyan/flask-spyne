@@ -1,0 +1,2 @@
+v0.1, 2014-05 -- Initial release.
+v0.2, 2014-05 -- Basic `SOAP WS-Security extension <https://en.wikipedia.org/wiki/WS-Security>`_ support added.

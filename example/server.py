@@ -9,13 +9,11 @@ from spyne.protocol.json import JsonDocument
 from spyne.model.primitive import Unicode, Integer
 from spyne.model.complex import Iterable, ComplexModel
 
-"""
 import logging
 h = logging.StreamHandler()
 rl = logging.getLogger()
 rl.setLevel(logging.DEBUG)
 rl.addHandler(h)
-"""
 
 app = Flask(__name__)
 
@@ -26,7 +24,7 @@ class AnswerServiceResponse(ComplexModel):
     dummy_str = Unicode(min_occurs=0, max_occurs=1, nillable=False)
     dummy_num = Integer(min_occurs=1, max_occurs=1, nillable=True)
 
-class SomeSoapService(spyne.service):    
+class SomeSoapService(spyne.Service):    
     __service_url_path__ = '/soap/someservice'
     __in_protocol__ = Soap11(validator='lxml')
     __out_protocol__ = Soap11()
@@ -39,8 +37,8 @@ class SomeSoapService(spyne.service):
     @spyne.srpc(Unicode, _returns=AnswerServiceResponse)
     def answer(str):        
         return AnswerServiceResponse(dummy_str='answer is', dummy_num=42)
-    
-class SomeSoapServiceTwo(spyne.service):    
+
+class SomeSoapServiceTwo(spyne.Service):    
     __service_url_path__ = '/soap/someservicetwo'
     __target_namespace__ = 'custom_namespacetwo'    
     __in_protocol__ = Soap11(validator='lxml')
@@ -55,7 +53,7 @@ class SomeSoapServiceTwo(spyne.service):
     def answer(str):        
         return AnswerServiceResponse(dummy_str='answer is', dummy_num=42)
 
-class SomeJsonService(spyne.service):
+class SomeJsonService(spyne.Service):
     __service_url_path__ = '/json/anotherservice'
     __in_protocol__ = HttpRpc(validator='soft')
     __out_protocol__ = JsonDocument(ignore_wrappers=True)
@@ -70,4 +68,4 @@ class SomeJsonService(spyne.service):
         return AnswerServiceResponse(dummy_str='answer is', dummy_num=42)
 
 if __name__ == '__main__':
-    app.run(host = '127.0.0.1')
+    app.run(host = '0.0.0.0')
