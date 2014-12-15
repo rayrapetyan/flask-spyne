@@ -30,12 +30,20 @@ class InvalidCredentialsError(Fault):
             'Client.InvalidCredentialsError', fault_string, detail=fault_object)
 
 class SpyneController(object):
-    def __init__(self, app):
-        self.app = app
+    def __init__(self, app=None):
         self.services = {}
+        self.app = app
+        if app:
+            self.init_app(app)
+
+    def init_app(self, app):
         self.real_wsgi_app = app.wsgi_app
         app.wsgi_app = self.wsgi_app
-        
+
+        if not hasattr(app, 'extensions'):
+            app.extensions = {}
+        app.extensions['spyne'] = self
+
     def register_service(self, service):        
         spyne_app = Application([service], 
             tns=service.__target_namespace__,
@@ -81,16 +89,11 @@ def _on_method_return_object(ctx):
 SpyneService.event_manager.add_listener('method_call', _on_method_call)
 SpyneService.event_manager.add_listener('method_return_object', _on_method_return_object)
 
-def make_spyne_controller(app):
-    if not hasattr(app, 'extensions'):
-        app.extensions = {}
-    rv = app.extensions['spyne'] = SpyneController(app)
-    return rv
 
 class Spyne(object):
-    def __init__(self, app):        
-        self.app = app        
-        self.controller = make_spyne_controller(app)      
+    def __init__(self, app=None):
+        self.app = app
+        self.controller = SpyneController()
 
         class _BoundService(SpyneService):        
             class __metaclass__(ServiceBaseMeta, type):
@@ -108,3 +111,9 @@ class Spyne(object):
         self.Service = _BoundService
         self.srpc = srpc
         self.rpc = rpc
+
+        if app:
+            self.init_app(app)
+
+    def init_app(self, app):
+        self.controller.init_app(app)
