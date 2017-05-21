@@ -24,4 +24,4 @@ client.set_options(soapheaders=security)
 
 r = client.service.echo(str='hello world', cnt=3)
 
-print r
+print(r)
