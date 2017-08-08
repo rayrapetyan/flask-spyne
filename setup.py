@@ -28,6 +28,6 @@ setup(
     platforms='any',
     packages=['flask_spyne'],
     url='http://github.com/rayrapetyan/flask-spyne',
-    version='0.3',
+    version='0.3.1',
     zip_safe=False
 )
