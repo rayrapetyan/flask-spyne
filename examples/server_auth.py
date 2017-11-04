@@ -1,6 +1,6 @@
 from flask import Flask
 
-from flask.ext.spyne import Spyne
+from flask_spyne import Spyne
 
 from spyne.protocol.soap import Soap11
 

@@ -4,7 +4,7 @@ from werkzeug.wsgi import DispatcherMiddleware
 
 from spyne.application import Application
 from spyne.decorator import rpc, srpc
-from spyne.service import ServiceBase, ServiceMeta
+from spyne.service import ServiceBase
 from spyne.server.wsgi import WsgiApplication
 from spyne.error import InvalidCredentialsError
 
@@ -14,6 +14,13 @@ from secwall import wsse
 from secwall.core import SecurityException
 
 from lxml import etree
+
+import pkg_resources
+spyne_ver = pkg_resources.get_distribution("spyne").version.split('.')
+if int(spyne_ver[0]) == 2 and int(spyne_ver[1]) <= 12:
+    from spyne.service import ServiceBaseMeta as ServiceMeta
+else:
+    from spyne.service import ServiceMeta
 
 
 class SpyneController(object):

@@ -26,7 +26,7 @@ Server example
 .. code-block:: python
 
   from flask import Flask
-  from flask.ext.spyne import Spyne
+  from flask_spyne import Spyne
   from spyne.protocol.soap import Soap11
   from spyne.model.primitive import Unicode, Integer
   from spyne.model.complex import Iterable
