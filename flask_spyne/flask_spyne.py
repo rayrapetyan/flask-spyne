@@ -4,7 +4,7 @@ from werkzeug.wsgi import DispatcherMiddleware
 
 from spyne.application import Application
 from spyne.decorator import rpc, srpc
-from spyne.service import ServiceBase, ServiceBaseMeta
+from spyne.service import ServiceBase, ServiceMeta
 from spyne.server.wsgi import WsgiApplication
 from spyne.error import InvalidCredentialsError
 
@@ -92,7 +92,7 @@ class Spyne(object):
         self.controller = SpyneController()
 
         class _BoundService(SpyneService):
-            class __metaclass__(ServiceBaseMeta, type):
+            class __metaclass__(ServiceMeta, type):
                 def __new__(cls, name, bases, dict):
                     rv = type.__new__(cls, name, bases, dict)
                     if name != '_BoundService':
@@ -100,7 +100,7 @@ class Spyne(object):
                     return rv
 
                 def __init__(cls, name, bases, dict):
-                    ServiceBaseMeta.__init__(cls, name, bases, dict)
+                    ServiceMeta.__init__(cls, name, bases, dict)
                     if name != '_BoundService':
                         self.controller.register_service(cls)
 
