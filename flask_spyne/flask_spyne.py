@@ -1,6 +1,6 @@
 import logging
 
-from werkzeug.wsgi import DispatcherMiddleware
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
 
 from spyne.application import Application
 from spyne.decorator import rpc, srpc
